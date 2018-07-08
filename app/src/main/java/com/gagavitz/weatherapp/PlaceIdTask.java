@@ -17,7 +17,7 @@ import java.util.Locale;
 public class PlaceIdTask extends AsyncTask<String, Void, JSONObject> {
 
     public AsyncResponse delegate = null;
-    private final static String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?lat=37.9358&lon=-122.3477";
+    private final static String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?lat=37.9358&lon=-122.3477&units=imperial";
     private final static String WEATHER_API = "4a759aaff0e075e454e38a07352fab8c";
 
     public static JSONObject getWeatherJSON(String lat, String lon) {
@@ -105,8 +105,8 @@ public class PlaceIdTask extends AsyncTask<String, Void, JSONObject> {
                 String city = jsonObject.getString("name").toUpperCase(Locale.US) + ", " + jsonObject.getJSONObject("sys").getString("country");
                 String description = details.getString("description").toUpperCase(Locale.US);
                 String temperature = String.format("%.2f", main.getDouble("temp")) + "°";
-                String humidity = String.format("%f", main.getDouble("humidity")) + "%";
-                String pressure = String.format("%f", main.getDouble("pressure")) + "hPa";
+                String humidity = String.format("%.0f", main.getDouble("humidity")) + "%";
+                String pressure = String.format("%.0f", main.getDouble("pressure")) + "hPa";
                 String updateOn = df.format(new Date(jsonObject.getLong("dt") * 1000));
                 String iconText = setWeatherIcon(details.getInt("id"), jsonObject.getJSONObject("sys").getLong("sunrise") * 1000, jsonObject.getJSONObject("sys").getLong("sunset") * 1000);
 
