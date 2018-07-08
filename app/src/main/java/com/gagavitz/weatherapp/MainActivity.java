@@ -44,6 +44,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        asyncTask.execute("-122.3477", "37.9358"); //Lon and lat for Richmond, CA
+        asyncTask.execute("37.9358", "-122.3477"); //Lon and lat for Richmond, CA
     }
 }

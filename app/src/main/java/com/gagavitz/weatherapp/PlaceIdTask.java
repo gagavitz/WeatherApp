@@ -17,12 +17,11 @@ import java.util.Locale;
 public class PlaceIdTask extends AsyncTask<String, Void, JSONObject> {
 
     public AsyncResponse delegate = null;
-    private final static String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?lat=37.9358&lon=-122.3477&units=imperial";
-    private final static String WEATHER_API = "4a759aaff0e075e454e38a07352fab8c";
+    private final static String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=imperial&appid=4a759aaff0e075e454e38a07352fab8c";
 
     public static JSONObject getWeatherJSON(String lat, String lon) {
         try {
-            URL url = new URL(WEATHER_URL + "&appid=" + WEATHER_API);
+            URL url = new URL(String.format(WEATHER_URL, lat, lon));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuffer json = new StringBuffer(1024);
